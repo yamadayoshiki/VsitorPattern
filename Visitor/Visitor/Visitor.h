@@ -10,10 +10,10 @@ using namespace std;
 class Visitor;
 
 /** ノードクラス *****************************/
-class Nodo {
+class Node {
 public:
-	Nodo(int id, string name);
-	virtual void add(Nodo* pNodo) = 0;
+	Node(int id, string name);
+	virtual void add(Node* pNodo) = 0;
 	virtual void accept(Visitor* pVisitor) = 0;
 	int getId();
 	string getName();
@@ -23,24 +23,24 @@ private:
 };
 /*********************************************/
 /** ファイルクラス ***************************/
-class File : public Nodo{
+class File : public Node{
 public:
 	File(int id, string name);
 	virtual ~File();
-	virtual void add(Nodo* pNodo) override;
+	virtual void add(Node* pNodo) override;
 	virtual void accept(Visitor* pVisitor) override;
 };
 /*********************************************/
 /** ディレクトリクラス ***********************/
-class Directory : public Nodo {
+class Directory : public Node {
 public:
 	Directory(int id, string name);
 	virtual ~Directory();
-	virtual void add(Nodo* pNodo) override;
+	virtual void add(Node* pNodo) override;
 	virtual void accept(Visitor* pVisitor) override;
 
 private:
-	list<Nodo*> children_;
+	list<Node*> children_;
 };
 /*********************************************/
 /** Visitorインターフェイス ******************/
@@ -55,12 +55,12 @@ class FindVisitor : public Visitor{
 public:
 	FindVisitor();
 	virtual ~FindVisitor();
-	list<Nodo*>* find(Nodo* pNodo, string name);
+	list<Node*>* find(Node* pNodo, string name);
 	virtual void visit(Directory* pDirectory) override;
 	virtual void visit(File* pFIle) override;
 private:
 	string name_;
-	list<Nodo*>* pResult_;
+	list<Node*>* pResult_;
 };
 /*********************************************/
 #endif // !VISITOR_H_
