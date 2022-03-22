@@ -1,6 +1,6 @@
 #include "MsgpackVisitor.h"
 
-MsgPackVisitor::MsgPackVisitor(string fileName){
+MsgPackVisitor::MsgPackVisitor(string fileName) {
 	fp_ = nullptr;
 	Load(fileName);
 }
